@@ -5,6 +5,10 @@
  */
 package com.modular.framework.utility;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 /**
  * @author rahul.rathore
  *	
@@ -14,12 +18,17 @@ package com.modular.framework.utility;
 public class ResourceHelper {
 	
 	public static String getResourcePath(String resource) {
-		String path = ResourceHelper.class.getClassLoader().getResource(resource).getPath();
+		String path = getBaseResourcePath() + resource;
 		return path;
 	}
 	
 	public static String getBaseResourcePath() {
-		return getResourcePath("/");
+		String path = ResourceHelper.class.getClass().getResource("/").getPath();
+		return path;
+	}
+	
+	public static InputStream getResourcePathInputStream(String resource) throws FileNotFoundException {
+		return new FileInputStream(ResourceHelper.getResourcePath(resource));
 	}
 	
 }
