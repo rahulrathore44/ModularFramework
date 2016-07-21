@@ -22,15 +22,7 @@ public class PropertyFileReader implements IconfigReader {
 	private Properties prop = null;
 
 	public PropertyFileReader() {
-
-		prop = new Properties();
-		try {
-			prop.load(ResourceHelper
-					.getResourcePathInputStream("resources/configfile/config.properties"));
-			System.out.println(prop.toString());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		this("config.properties");
 	}
 
 	public PropertyFileReader(String fileName) {

@@ -15,5 +15,6 @@ public enum BrowserType {
 	Firefox,
 	Chrome,
 	Iexplorer,
-	PhantomJs
+	PhantomJs,
+	HtmlUnitDriver
 }
