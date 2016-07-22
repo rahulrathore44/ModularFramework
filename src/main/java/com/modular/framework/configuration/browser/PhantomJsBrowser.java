@@ -21,7 +21,7 @@ import com.modular.framework.utility.ResourceHelper;
 public class PhantomJsBrowser {
 	
 	public static PhantomJSDriverService getPhantomJsService() {
-		System.setProperty("phantomjs.binary.path", ResourceHelper.getResourcePath("resources/driver/phantomjs.exe"));
+		System.setProperty("phantomjs.binary.path", ResourceHelper.getResourcePath("driver/phantomjs.exe"));
 		PhantomJSDriverService service = PhantomJSDriverService
 				.createDefaultService();
 		return service;

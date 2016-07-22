@@ -30,7 +30,7 @@ public class PropertyFileReader implements IconfigReader {
 		prop = new Properties();
 		try {
 			prop.load(ResourceHelper
-					.getResourcePathInputStream("resources/configfile/"
+					.getResourcePathInputStream("configfile/"
 							+ fileName));
 			System.out.println(prop.toString());
 		} catch (Exception e) {
