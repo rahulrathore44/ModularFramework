@@ -14,6 +14,9 @@ import com.modular.framework.configuration.browser.HtmlUnitBrowser;
 import com.modular.framework.configuration.browser.IExploreBrowser;
 import com.modular.framework.configuration.browser.PhantomJsBrowser;
 import com.modular.framework.configuration.configreader.PropertyFileReader;
+import com.modular.framework.configuration.exception.NoSutiableDriverFoundException;
+
+
 
 public class InitWebdriver {
 
@@ -58,11 +61,11 @@ public class InitWebdriver {
 					PhantomJsBrowser.getPhantomJsCapability());
 			break;
 		default:
-			Driver = HtmlUnitBrowser.getHtmlUnitDriver();
-			break;
+			throw new NoSutiableDriverFoundException(" Driver Not Found : " + reader.getBrowser());
 		}
 	}
-
+	
+	
 	@AfterTest(alwaysRun = true)
 	public static void tearDown() {
 		
