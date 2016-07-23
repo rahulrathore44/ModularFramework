@@ -37,7 +37,7 @@ public class IExploreBrowser {
 	
 	public static WebDriver getIExplorerDriver(Capabilities cap) {
 		System.setProperty("webdriver.ie.driver", ResourceHelper.getResourcePath("driver/IEDriverServer.exe"));
-		//System.setProperty("webdriver.ie.driver.logfile", ResourceHelper.getResourcePath("logs/ielog/ielog" + DateTimeHelper.getCurrentDateTime() + ".log"));
+		System.setProperty("webdriver.ie.driver.logfile", ResourceHelper.getResourcePath("logs/iexplorerlogs/") + "ielog" + DateTimeHelper.getCurrentDateTime() + ".log");
 		InternetExplorerDriver driver = new InternetExplorerDriver(cap);
 		return driver;
 	}

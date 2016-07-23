@@ -1,10 +1,9 @@
 package com.modular.framework.helper;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 
 import com.modular.framework.configuration.browser.BrowserType;
@@ -63,8 +62,20 @@ public class InitWebdriver {
 		default:
 			throw new NoSutiableDriverFoundException(" Driver Not Found : " + reader.getBrowser());
 		}
+		Driver.manage().timeouts().pageLoadTimeout(reader.getPageLoadTimeOut(), TimeUnit.SECONDS);
+		Driver.manage().timeouts().implicitlyWait(reader.getImplicitWait(), TimeUnit.SECONDS);
+		Driver.get(reader.getWebsite());
 	}
 	
+	public static WebDriver getDefaultDriver() {
+		
+		if(Driver != null){
+			Driver.switchTo().defaultContent();
+		}
+		
+	return Driver;
+	
+	}
 	
 	@AfterTest(alwaysRun = true)
 	public static void tearDown() {

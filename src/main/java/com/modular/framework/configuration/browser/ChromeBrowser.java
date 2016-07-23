@@ -28,7 +28,7 @@ public class ChromeBrowser {
 	
 	public static WebDriver getChromeDriver(Capabilities cap){
 		System.setProperty("webdriver.chrome.driver", ResourceHelper.getResourcePath("driver/chromedriver.exe"));
-		//System.setProperty("webdriver.chrome.logfile", ResourceHelper.getResourcePath("logs/chromelog/chromelog" + DateTimeHelper.getCurrentDateTime() + ".log"));
+		System.setProperty("webdriver.chrome.logfile", ResourceHelper.getResourcePath("logs/chromelogs/") + "chromelog" + DateTimeHelper.getCurrentDateTime() + ".log");
 		ChromeDriver driver = new ChromeDriver(cap);
 		return driver;
 	}
