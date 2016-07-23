@@ -14,6 +14,7 @@ import com.modular.framework.configuration.browser.IExploreBrowser;
 import com.modular.framework.configuration.browser.PhantomJsBrowser;
 import com.modular.framework.configuration.configreader.PropertyFileReader;
 import com.modular.framework.configuration.exception.NoSutiableDriverFoundException;
+import com.modular.framework.interfaces.IconfigReader;
 
 
 
@@ -75,6 +76,10 @@ public class InitWebdriver {
 		
 	return Driver;
 	
+	}
+	
+	public static IconfigReader getReader(){
+		return reader;
 	}
 	
 	@AfterTest(alwaysRun = true)
