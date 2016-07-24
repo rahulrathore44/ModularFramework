@@ -5,12 +5,15 @@
  */
 package com.modular.framework.configuration.browser;
 
+import java.io.File;
+
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import com.modular.framework.utility.DateTimeHelper;
 import com.modular.framework.utility.ResourceHelper;
 
 /**
@@ -21,10 +24,12 @@ import com.modular.framework.utility.ResourceHelper;
 public class PhantomJsBrowser {
 	
 	public static PhantomJSDriverService getPhantomJsService() {
-		System.setProperty("phantomjs.binary.path", ResourceHelper.getResourcePath("driver/phantomjs.exe"));
-		PhantomJSDriverService service = PhantomJSDriverService
-				.createDefaultService();
-		return service;
+		return new PhantomJSDriverService.Builder()
+				.usingAnyFreePort()
+				.usingPhantomJSExecutable(new File(ResourceHelper.getResourcePath("driver/phantomjs.exe")))
+				.withLogFile(new File(ResourceHelper.getResourcePath("logs/phantomjslogs/") + "phantomjslogs" + DateTimeHelper.getCurrentDateTime() + ".log"))
+				.build();
+		
 	}
 	
 	public static Capabilities getPhantomJsCapability() {

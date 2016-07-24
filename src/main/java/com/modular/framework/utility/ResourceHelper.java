@@ -9,6 +9,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
+import org.apache.log4j.Logger;
+
+import com.modular.framework.helper.TextBox.TextBoxHelper;
+import com.modular.framework.helper.logger.LoggerHelper;
+
 /**
  * @author rahul.rathore
  *	
@@ -17,15 +22,18 @@ import java.io.InputStream;
  */
 public class ResourceHelper {
 	
+	public static final Logger log = LoggerHelper
+			.getLogger(ResourceHelper.class);
+	
 	public static String getResourcePath(String resource) {
 		String path = getBaseResourcePath() + resource;
-		System.out.println("Resource Path : " + path);
+		log.info(path);
 		return path;
 	}
 	
 	public static String getBaseResourcePath() {
 		String path = ResourceHelper.class.getClass().getResource("/").getPath();
-		System.out.println("Resource Path : " + path);
+		log.info(path);
 		return path;
 	}
 	

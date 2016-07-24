@@ -2,6 +2,7 @@ package com.modular.framework.helper;
 
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -14,6 +15,7 @@ import com.modular.framework.configuration.browser.IExploreBrowser;
 import com.modular.framework.configuration.browser.PhantomJsBrowser;
 import com.modular.framework.configuration.configreader.PropertyFileReader;
 import com.modular.framework.configuration.exception.NoSutiableDriverFoundException;
+import com.modular.framework.helper.logger.LoggerHelper;
 import com.modular.framework.interfaces.IconfigReader;
 
 
@@ -22,6 +24,7 @@ public class InitWebdriver {
 
 	protected static PropertyFileReader reader = null;
 	protected static WebDriver Driver = null;
+	public static final Logger log = LoggerHelper.getLogger(InitWebdriver.class);
 
 	public InitWebdriver() {
 		reader = new PropertyFileReader();
@@ -34,7 +37,7 @@ public class InitWebdriver {
 	@BeforeTest
 	public static void setUp() {
 		BrowserType type = reader.getBrowser();
-
+		log.info("Browser Type : " + type);
 		switch (type) {
 
 		case Firefox:
@@ -73,12 +76,12 @@ public class InitWebdriver {
 		if(Driver != null){
 			Driver.switchTo().defaultContent();
 		}
-		
-	return Driver;
-	
+		log.info("Driver Object");
+		return Driver;
 	}
 	
 	public static IconfigReader getReader(){
+		log.info("Reader Object");
 		return reader;
 	}
 	
@@ -88,6 +91,7 @@ public class InitWebdriver {
 		if(Driver != null){
 			Driver.quit();
 			Driver = null;
+			log.info("Shutting down the Driver");
 		}
 	}
 
