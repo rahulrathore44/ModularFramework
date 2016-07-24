@@ -4,6 +4,8 @@
 	<listeners>
 		<listener
 			class-name="com.modular.framework.liteners.reportlistener.ExtentReportListener" />
+			<listener
+			class-name="com.modular.framework.liteners.reportlistener.ExcelReportListener" />
 	</listeners>
 	<test name="Test - 1">
 		<classes>

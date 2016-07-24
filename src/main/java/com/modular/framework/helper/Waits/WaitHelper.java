@@ -21,6 +21,7 @@ import com.modular.framework.helper.Generic.GenericHelper;
  *	23-Jul-2016
  *
  */
+@SuppressWarnings("rawtypes")
 public class WaitHelper {
 	
 	
