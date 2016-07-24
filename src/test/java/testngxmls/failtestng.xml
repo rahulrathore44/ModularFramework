@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Suite">
+<suite name="FailedSuite">
 	<listeners>
 		<listener
 			class-name="com.modular.framework.liteners.reportlistener.ExtentReportListener" />
 	</listeners>
-	<test name="Test - 1">
+	<test name="Failed">
 		<classes>
-			<class name="com.modular.framework.MainClass" />
-			<class name="com.modular.framework.TestClass" />
-		</classes>
-	</test> <!-- Test -->
-	<test name="Test - 2">
-		<classes>
-			<class name="com.modular.framework.MainClass" />
+			<class name="com.modular.framework.TestFailClass" />
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->

@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -16,15 +17,20 @@ import com.modular.framework.helper.TextBox.TextBoxHelper;
 import com.modular.framework.helper.Waits.WaitHelper;
 import com.modular.framework.helper.dropdown.DropDownHelper;
 
-public class MainClass extends InitWebdriver{
+public class TestClass extends InitWebdriver{
 	
 	 @Test
-	  public void checkThat2is2() {
+	  public void checkThat2is3() {
 	       System.out.println("asdasdsd");
 	  }
 	
+	 @Test
+		public void testFail() {
+			//Assert.fail("Check for Failure", new NoSuchElementException(null));
+		}
+	 
 	@Test
-	public void test() throws Exception {
+	public void testMethod() throws Exception {
 		LinkHelper.clickPartialLink("File a Bug");
 		WaitHelper.waitForElement(By.id("Bugzilla_login"), 90, 250, TimeUnit.SECONDS, NoSuchElementException.class,
 				ElementNotFoundException.class,
