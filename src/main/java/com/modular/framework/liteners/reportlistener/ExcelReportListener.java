@@ -57,7 +57,7 @@ public class ExcelReportListener implements ISuiteListener, ITestListener {
 	
 	public void onFinish(ITestContext arg0) {
 		
-		String path = ResourceHelper.getResourcePath("reports/excelreports/") + arg0.getSuite().getName() + DateTimeHelper.getCurrentDate() + ".xlsx";
+		String path = ResourceHelper.getResourcePath("reports/excelreports/") + arg0.getSuite().getName() + DateTimeHelper.getCurrentDateTime() + ".xlsx";
 		
 		File xl_file = new File(path);
 		

@@ -5,6 +5,8 @@
  */
 package com.modular.framework.liteners.reportlistener;
 
+import java.io.IOException;
+
 import org.apache.log4j.Logger;
 import org.testng.ISuite;
 import org.testng.ISuiteListener;
@@ -12,6 +14,7 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import com.modular.framework.helper.Generic.GenericHelper;
 import com.modular.framework.helper.logger.LoggerHelper;
 import com.modular.framework.utility.DateTimeHelper;
 import com.modular.framework.utility.ResourceHelper;
@@ -66,7 +69,11 @@ public class ExtentReportListener implements ISuiteListener,ITestListener {
 	public void onTestFailure(ITestResult test) {
 		exTest.log(LogStatus.FAIL, test.getMethod().getMethodName());
 		exTest.log(LogStatus.FAIL, test.getThrowable());
-		
+		try {
+			exTest.addScreenCapture(GenericHelper.takeScreenShot(test.getMethod().getMethodName()));
+		} catch (IOException e) {
+			// Ignore
+		}
 	}
 
 	public void onTestSkipped(ITestResult arg0) {

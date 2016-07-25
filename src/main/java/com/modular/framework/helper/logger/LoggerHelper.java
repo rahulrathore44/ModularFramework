@@ -21,6 +21,7 @@ import com.modular.framework.utility.ResourceHelper;
  *	24-Jul-2016
  *
  */
+@SuppressWarnings("rawtypes")
 public class LoggerHelper {
 	
 	private static String patteren = "%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{1}] - [%M] %m%n";
