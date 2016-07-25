@@ -20,7 +20,7 @@ public class MainClass extends InitWebdriver{
 	
 	 @Test
 	  public void checkThat2is2() {
-	       System.out.println("asdasdsd");
+	       System.out.println("Main Class");
 	  }
 	
 	@Test

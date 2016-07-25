@@ -66,7 +66,7 @@ public class PropertyFileReader implements IconfigReader {
 		return BrowserType.valueOf(prop.getProperty("Browser"));
 	}
 	
-	public Level getLoggerLevel() {
+	/*public Level getLoggerLevel() {
 		
 		switch (prop.getProperty("Logger.Level")) {
 		
@@ -82,6 +82,6 @@ public class PropertyFileReader implements IconfigReader {
 			return Level.FATAL;
 		}
 		return Level.ALL;
-	}
+	}*/
 
 }

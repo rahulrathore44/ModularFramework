@@ -72,10 +72,6 @@ public class InitWebdriver {
 	}
 	
 	public static WebDriver getDefaultDriver() {
-		
-		if(Driver != null){
-			Driver.switchTo().defaultContent();
-		}
 		log.info("Driver Object");
 		return Driver;
 	}

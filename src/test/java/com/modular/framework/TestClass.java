@@ -21,7 +21,7 @@ public class TestClass extends InitWebdriver{
 	
 	 @Test
 	  public void checkThat2is3() {
-	       System.out.println("asdasdsd");
+	       System.out.println("Test Method");
 	  }
 	
 	 @Test

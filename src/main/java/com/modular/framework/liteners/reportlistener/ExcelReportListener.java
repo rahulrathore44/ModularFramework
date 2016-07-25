@@ -181,22 +181,18 @@ public class ExcelReportListener implements ISuiteListener, ITestListener {
 	}
 
 	public void onTestSkipped(ITestResult arg0) {
-		oLog.warn(arg0.getName() + " Skipped ");
 
 	}
 
 	public void onTestStart(ITestResult arg0) {
-		oLog.info(arg0.getName() + " Started ");
 
 	}
 
 	public void onTestSuccess(ITestResult arg0) {
-		oLog.info(arg0.getName() + " Success ");
 
 	}
 
 	public void onFinish(ISuite arg0) {
-		oLog.info(arg0.getName() + " Finish ");
 	}
 
 	public void onStart(ISuite arg0) {

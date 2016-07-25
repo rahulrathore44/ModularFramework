@@ -15,7 +15,7 @@
 	</test> <!-- Test -->
 	<test name="Test - 2">
 		<classes>
-			<class name="com.modular.framework.MainClass" />
+			<class name="com.modular.framework.TestScreenShot" />
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->

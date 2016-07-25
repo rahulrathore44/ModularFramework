@@ -19,6 +19,22 @@
 	<build>
 		<plugins>
 			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+						<configuration>
+							<source>1.7</source>
+							<target>1.7</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>3.0.1</version>
 				<executions>
@@ -44,11 +60,11 @@
 				<version>2.19.1</version>
 				<executions>
 					<execution>
+						<phase>test</phase>
 						<goals>
 							<goal>test</goal>
 						</goals>
 						<configuration>
-							<testFailureIgnore>true</testFailureIgnore>
 							<suiteXmlFiles>
 								<suiteXmlFile>src/test/java/testngxmls/testng.xml</suiteXmlFile>
 							</suiteXmlFiles>
