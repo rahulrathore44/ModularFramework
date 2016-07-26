@@ -29,11 +29,14 @@ public class TestFailClass extends InitWebdriver {
 	
 	@Test
 	public void testFail() {
+		Driver.get(reader.getWebsite());
 		LinkHelper.clickPartialLink("File a Bug");
 		WaitHelper.waitForElement(By.id("Bugzilla_login"), 90, 250, TimeUnit.SECONDS, NoSuchElementException.class,
 				ElementNotFoundException.class,
 				ElementNotVisibleException.class);
 		TextBoxHelper.sendKeys(By.id("Bugzilla_login1"), reader.getUserName()); // Invalid id
 	} 
+	
+	
 
 }

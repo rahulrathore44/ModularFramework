@@ -20,22 +20,24 @@ import com.modular.framework.helper.logger.LoggerHelper;
 public class AlertHelper {
 
 	public static final Logger log = LoggerHelper.getLogger(AlertHelper.class);
+	
+	public static Alert getAlert() {
+		WebDriver driver = InitWebdriver.getDefaultDriver();
+		return driver.switchTo().alert();
+	}
 
 	public static void AcceptAlert() {
-		WebDriver driver = InitWebdriver.getDefaultDriver();
-		driver.switchTo().alert().accept();
+		getAlert().accept();
 		log.info("Accept the Alert");
 	}
 
 	public static void DismissAlert() {
-		WebDriver driver = InitWebdriver.getDefaultDriver();
-		driver.switchTo().alert().dismiss();
+		getAlert().dismiss();
 		log.info("Dismiss the Alert");
 	}
 
 	public static String getAlertText() {
-		WebDriver driver = InitWebdriver.getDefaultDriver();
-		String text = driver.switchTo().alert().getText();
+		String text = getAlert().getText();
 		log.info(text);
 		return text;
 	}

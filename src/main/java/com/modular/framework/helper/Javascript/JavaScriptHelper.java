@@ -26,8 +26,7 @@ public class JavaScriptHelper {
 		WebDriver driver = InitWebdriver.getDefaultDriver();
 		JavascriptExecutor exe = (JavascriptExecutor)driver;
 		log.info("Javascript : " + script);
-		exe.executeAsyncScript(script);
-		return null;
+		return exe.executeScript(script);
 		
 	}
 
