@@ -7,6 +7,7 @@ package com.modular.framework.helper.Waits;
 
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,6 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.modular.framework.helper.InitWebdriver;
 import com.modular.framework.helper.Generic.GenericHelper;
+import com.modular.framework.helper.logger.LoggerHelper;
 
 /**
  * @author rahul.rathore
@@ -24,6 +26,7 @@ import com.modular.framework.helper.Generic.GenericHelper;
 @SuppressWarnings("rawtypes")
 public class WaitHelper {
 	
+	public static final Logger log = LoggerHelper.getLogger(WaitHelper.class);
 	
 	private static WebDriverWait getWait(int timeOutInSeconds,int pollingEveryInMiliSec,TimeUnit unit,Class...exceptiontoIgnore ) {
 		WebDriver driver = InitWebdriver.getDefaultDriver();
@@ -34,6 +37,7 @@ public class WaitHelper {
 				wait.ignoring(exp);
 			}
 		}
+		log.debug("Getting the Wait Object");
 		return wait;
 	}
 	
@@ -43,18 +47,29 @@ public class WaitHelper {
 		driver
 		.manage()
 		.timeouts()
-		.implicitlyWait(timeout, unit);
-		
+		.implicitlyWait(timeout, unit == null ? TimeUnit.SECONDS : unit);
+		log.debug("Timeout :" + timeout);
 	}
 	
 	public static void waitForElement(By locator,int timeOutInSeconds,int pollingEveryInMiliSec,TimeUnit unit,Class...exceptiontoIgnore ) {
+		setImplicitWait(1, TimeUnit.SECONDS);
 		WebDriverWait wait = getWait(timeOutInSeconds, pollingEveryInMiliSec, unit, exceptiontoIgnore);
+		log.info(locator);
 		wait.until(ExpectedConditions.visibilityOf(GenericHelper.getElement(locator)));
+		setImplicitWait(InitWebdriver.getReader().getImplicitWait(), TimeUnit.SECONDS);
 	}
 
 	public static void hardWait(int timeOutInMiliSec) throws InterruptedException {
+		log.debug("Sleep : " + timeOutInMiliSec);
 		Thread.sleep(timeOutInMiliSec);
 	}
 	
+	public static void waitForElementVisible(By locator,int timeOutInSeconds,int pollingEveryInMiliSec,TimeUnit unit,Class...exceptiontoIgnore ) {
+		setImplicitWait(1, TimeUnit.SECONDS);
+		WebDriverWait wait = getWait(timeOutInSeconds, pollingEveryInMiliSec, unit, exceptiontoIgnore);
+		log.info(locator);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+		setImplicitWait(InitWebdriver.getReader().getImplicitWait(), TimeUnit.SECONDS);
+	}
 
 }

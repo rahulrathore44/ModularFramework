@@ -72,12 +72,12 @@ public class InitWebdriver {
 	}
 	
 	public static WebDriver getDefaultDriver() {
-		log.info("Driver Object");
+		log.debug("Driver Object");
 		return Driver;
 	}
 	
 	public static IconfigReader getReader(){
-		log.info("Reader Object");
+		log.debug("Reader Object");
 		return reader;
 	}
 	
