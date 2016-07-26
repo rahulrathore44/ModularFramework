@@ -24,10 +24,10 @@ public class TestClass extends InitWebdriver{
 	       System.out.println("Test Method");
 	  }
 	
-	 @Test
+	/* @Test
 		public void testFail() {
 			//Assert.fail("Check for Failure", new NoSuchElementException(null));
-		}
+		}*/
 	 
 	@Test
 	public void testMethod() throws Exception {

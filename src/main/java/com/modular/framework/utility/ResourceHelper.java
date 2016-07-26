@@ -26,13 +26,13 @@ public class ResourceHelper {
 	
 	public static String getResourcePath(String resource) {
 		String path = getBaseResourcePath() + resource;
-		log.info(path);
+		log.debug(path);
 		return path;
 	}
 	
 	public static String getBaseResourcePath() {
 		String path = ResourceHelper.class.getClass().getResource("/").getPath();
-		log.info(path);
+		log.debug(path);
 		return path;
 	}
 	

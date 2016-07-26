@@ -16,6 +16,7 @@
 	<test name="Test - 2">
 		<classes>
 			<class name="com.modular.framework.TestScreenShot" />
+			<class name="com.modular.framework.TestFailClass" />
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->
