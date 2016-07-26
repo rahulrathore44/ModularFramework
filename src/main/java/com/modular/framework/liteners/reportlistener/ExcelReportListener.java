@@ -13,7 +13,9 @@ import java.util.Iterator;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.apache.poi.common.usermodel.Hyperlink;
 import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -57,15 +59,15 @@ public class ExcelReportListener implements ISuiteListener, ITestListener {
 	
 	public void onFinish(ITestContext arg0) {
 		
-		String path = ResourceHelper.getResourcePath("reports/excelreports/") + arg0.getSuite().getName() + DateTimeHelper.getCurrentDateTime() + ".xlsx";
+		String path = ResourceHelper.getResourcePath("reports/excelreports/") + arg0.getSuite().getName() + DateTimeHelper.getCurrentDate() + ".xlsx";
 		
 		File xl_file = new File(path);
 		
-		/*String imagePath = "file:" + getPath() + "screenshot" + System.getProperty("file.separator");
+		String imagePath = "file:" + ResourceHelper.getResourcePath("screenshots/") + DateTimeHelper.getCurrentDate() + System.getProperty("file.separator");
 		imagePath = imagePath.replaceAll("/", "///");
-		imagePath = imagePath.substring(0, (imagePath.length() -1));*/
+		imagePath = imagePath.substring(0, (imagePath.length() -1));
 		
-		//System.out.println("Image Path : " + imagePath);
+		oLog.debug("Image Path : " + imagePath);
 		
 		pass = arg0.getPassedTests();
 		fail = arg0.getFailedTests();
@@ -133,13 +135,13 @@ public class ExcelReportListener implements ISuiteListener, ITestListener {
 				XSSFCell exp_cel = row.createCell(2);
 				exp_cel.setCellValue(iTestResult.getThrowable().getMessage());
 				
-				/*CreationHelper createHelper = book.getCreationHelper();
+				CreationHelper createHelper = book.getCreationHelper();
 				Hyperlink link = createHelper.createHyperlink(Hyperlink.LINK_FILE);
 				XSSFCell pic_cell = row.createCell(3);
 				pic_cell.setCellValue("Click Here for ScreenShot");
 				
-				link.setAddress(imagePath + "///" + iTestNGMethod.getTestClass().getName() + "." + iTestNGMethod.getMethodName() + ".jpg");
-				pic_cell.setHyperlink((org.apache.poi.ss.usermodel.Hyperlink) link);*/
+				link.setAddress(imagePath + "///" + iTestNGMethod.getMethodName() + ".jpg");
+				pic_cell.setHyperlink((org.apache.poi.ss.usermodel.Hyperlink) link);
 				
 			}
 			

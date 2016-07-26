@@ -15,7 +15,7 @@ public class DateTimeHelper {
 	}
 
 	public static String getCurrentDate() {
-		return getCurrentDateTime().substring(0, 12);
+		return getCurrentDateTime().substring(0, 11);
 	}
 
 }
