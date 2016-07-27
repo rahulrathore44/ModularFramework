@@ -9,7 +9,9 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -70,6 +72,25 @@ public class WaitHelper {
 		log.info(locator);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 		setImplicitWait(InitWebdriver.getReader().getImplicitWait(), TimeUnit.SECONDS);
+	}
+	
+	public static WebElement handleStaleElement(By locator,int retryCount,int delayInSeconds) throws InterruptedException {
+		
+		WebDriver driver = InitWebdriver.getDefaultDriver();
+		WebElement element = null;
+		
+		while (retryCount >= 0) {
+			try {
+				element = driver.findElement(locator);
+				log.info(element);
+				return element;
+			} catch (StaleElementReferenceException e) {
+				log.info("Recovering the Element : " + locator + " Retry : " + retryCount);
+				hardWait(delayInSeconds);
+				retryCount--;
+			}
+		}
+		throw new StaleElementReferenceException("Element cannot be recovered");
 	}
 
 }
