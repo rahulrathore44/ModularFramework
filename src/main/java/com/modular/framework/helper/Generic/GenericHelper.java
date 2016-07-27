@@ -80,5 +80,10 @@ public class GenericHelper {
 		}
 		return destPath.getAbsolutePath();
 	}
+	
+	public static String takeScreenShot() {
+		WebDriver driver = InitWebdriver.getDefaultDriver();
+		return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BASE64);
+	}
 
 }

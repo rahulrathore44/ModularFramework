@@ -70,9 +70,9 @@ public class ExtentReportListener implements ISuiteListener,ITestListener {
 		exTest.log(LogStatus.FAIL, test.getMethod().getMethodName());
 		exTest.log(LogStatus.FAIL, test.getThrowable());
 		try {
-			exTest.addScreenCapture(GenericHelper.takeScreenShot(test.getMethod().getMethodName()));
-		} catch (IOException e) {
-			// Ignore
+			exTest.log(LogStatus.INFO, exTest.addScreenCapture(GenericHelper.takeScreenShot(test.getMethod().getMethodName())));
+		}catch (IOException e) {
+			log.error("Cannot Add the ScreenShot", e);
 		}
 	}
 
