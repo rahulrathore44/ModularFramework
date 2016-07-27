@@ -6,15 +6,12 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.modular.framework.helper.InitWebdriver;
-import com.modular.framework.helper.Alert.AlertHelper;
 import com.modular.framework.helper.Button.ButtonHelper;
 import com.modular.framework.helper.HyperLink.LinkHelper;
-import com.modular.framework.helper.Javascript.JavaScriptHelper;
 import com.modular.framework.helper.TextBox.TextBoxHelper;
 import com.modular.framework.helper.Waits.WaitHelper;
 import com.modular.framework.helper.dropdown.DropDownHelper;
@@ -25,33 +22,7 @@ public class TestClass extends InitWebdriver {
 	public void checkThat2is3() {
 		System.out.println("Test Method");
 	}
-
-	@Test
-	public void testConfirm() {
-		Driver.get("http://www.google.com");
-		JavaScriptHelper.executeScript("confirm('Press a button');");
-		AlertHelper.AcceptAlertIfPresent();
-		JavaScriptHelper.executeScript("confirm('Press a button');");
-		AlertHelper.DismissAlertIfPresent();
-	}
 	
-	@Test
-	public void testPromt() {
-		Driver.get("http://www.google.com");
-		JavaScriptHelper.executeScript("prompt('Please enter your name');");
-		AlertHelper.AcceptPrompt("Harry Potter");
-		JavaScriptHelper.executeScript("prompt('Please enter your name');");
-		AlertHelper.DismissAlertIfPresent();
-	}
-	
-	@Test
-	public void testAlert() {
-		Driver.get("http://www.google.com");
-		JavaScriptHelper.executeScript("alert('Please enter your name');");
-		System.out.println(AlertHelper.getAlertText());
-		AlertHelper.AcceptAlertIfPresent();
-	}
-
 	@Test
 	public void testMethod() throws Exception {
 		Driver.get(reader.getWebsite());

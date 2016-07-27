@@ -69,6 +69,7 @@ public class InitWebdriver {
 		Driver.manage().timeouts().pageLoadTimeout(reader.getPageLoadTimeOut(), TimeUnit.SECONDS);
 		Driver.manage().timeouts().implicitlyWait(reader.getImplicitWait(), TimeUnit.SECONDS);
 		Driver.get(reader.getWebsite());
+		Driver.manage().window().maximize();
 	}
 	
 	public static WebDriver getDefaultDriver() {

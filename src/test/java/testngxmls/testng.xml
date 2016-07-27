@@ -7,16 +7,26 @@
 			<listener
 			class-name="com.modular.framework.liteners.reportlistener.ExcelReportListener" />
 	</listeners>
-	<test name="Test - 1">
+	<test name="Test">
 		<classes>
 			<class name="com.modular.framework.MainClass" />
 			<class name="com.modular.framework.TestClass" />
 		</classes>
 	</test> <!-- Test -->
-	<test name="Test - 2">
+	<test name="Screenshot Test">
 		<classes>
 			<class name="com.modular.framework.TestScreenShot" />
 			<class name="com.modular.framework.TestFailClass" />
+		</classes>
+	</test> <!-- Test -->
+	<test name="Browser Test">
+		<classes>
+			<class name="com.modular.framework.TestBrowserWindow" />
+		</classes>
+	</test> <!-- Test -->
+	<test name="JavaScript Test">
+		<classes>
+			<class name="com.modular.framework.TestJavaScript" />
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->
