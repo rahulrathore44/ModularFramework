@@ -29,4 +29,9 @@
 			<class name="com.modular.framework.TestJavaScript" />
 		</classes>
 	</test> <!-- Test -->
+	<test name="ExcelReader Test">
+		<classes>
+			<class name="com.modular.framework.TestExcelData" />
+		</classes>
+	</test> <!-- Test -->
 </suite> <!-- Suite -->
