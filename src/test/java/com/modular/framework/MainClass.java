@@ -25,6 +25,7 @@ public class MainClass extends InitWebdriver{
 	
 	@Test
 	public void test() throws Exception {
+		Driver.get(reader.getWebsite());
 		LinkHelper.clickPartialLink("File a Bug");
 		WaitHelper.waitForElement(By.id("Bugzilla_login"), 90, 250, TimeUnit.SECONDS, NoSuchElementException.class,
 				ElementNotFoundException.class,

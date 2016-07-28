@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -64,10 +65,27 @@ public class ExcelReaderHelper implements IexcelReader {
 	
 	@Override
 	public Object[][] getData() {
+		List<Map<String, Object>> xlData = getExcelData();
+		Object[][] data = new Object[xlData.size()][1];
+		int i = 0;
+		for (Map<String, Object> objects : xlData) {
+			data[i++][0] = objects;
+		}
+		return data;
+	}
+
+	@Override
+	public Object[][] getData(String sheet) {
+		this.sheetName = sheet;
+		return getData();
+	}
+
+	@Override
+	public List<Map<String, Object>> getExcelData() {
 		XSSFSheet sheet = wBook.getSheet(sheetName);
 		int totalCol = sheet.getRow(0).getLastCellNum();
 		List<String> header = getHeaderArray();
-		Object[][] data = new Object[sheet.getLastRowNum()][1]; 
+		List<Map<String, Object>> data = new LinkedList<Map<String, Object>>(); 
 		LinkedHashMap<String, Object> xlData = null;
 		
 		for (int i = sheet.getFirstRowNum() + 1; i <= sheet.getLastRowNum(); i++) {
@@ -92,15 +110,15 @@ public class ExcelReaderHelper implements IexcelReader {
 					break;
 				}
 			}
-			data[i-1][0] = xlData;
+			data.add(xlData);
 		}
 		return data;
 	}
 
 	@Override
-	public Object[][] getData(String sheet) {
+	public List<Map<String, Object>> getExcelData(String sheet) {
 		this.sheetName = sheet;
-		return getData();
+		return getExcelData();
 	}
 
 }
