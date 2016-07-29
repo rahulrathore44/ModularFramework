@@ -35,4 +35,9 @@
 			<class name="com.modular.framework.TestCheckBox" />
 		</classes>
 	</test> <!-- Test -->
+	<test name="Page Object Test">
+		<classes>
+			<class name="com.modular.framework.TestPageObject" />
+		</classes>
+	</test> <!-- Test -->
 </suite> <!-- Suite -->
