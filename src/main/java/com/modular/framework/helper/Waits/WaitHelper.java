@@ -9,12 +9,16 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.InvalidElementStateException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.google.common.base.Function;
 import com.modular.framework.helper.InitWebdriver;
 import com.modular.framework.helper.Generic.GenericHelper;
 import com.modular.framework.helper.logger.LoggerHelper;
@@ -92,5 +96,27 @@ public class WaitHelper {
 		}
 		throw new StaleElementReferenceException("Element cannot be recovered");
 	}
+	
+	public static void elementExits(By locator,int timeOutInSeconds,int pollingEveryInMiliSec,TimeUnit unit) {
+		setImplicitWait(1, TimeUnit.SECONDS);
+		WebDriverWait wait = getWait(timeOutInSeconds, pollingEveryInMiliSec, unit, NoSuchElementException.class,
+				InvalidElementStateException.class);
+		log.info(locator);
+		wait.until(elementLocatedBy(locator));
+		setImplicitWait(InitWebdriver.getReader().getImplicitWait(), TimeUnit.SECONDS);
+	}
+	
+	private static Function<WebDriver, Boolean> elementLocatedBy(final By locator){
+		return new Function<WebDriver, Boolean>() {
+
+			@Override
+			public Boolean apply(WebDriver driver) {
+				log.debug("Waiting for Element :" + locator);
+				return driver.findElements(locator).size() >= 1;
+			}
+		};
+	}
+		
+		
 
 }

@@ -14,6 +14,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<aspectj.version>1.7.4</aspectj.version>
 		<allure.version>1.4.22</allure.version>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
 	</properties>
 
 	<build>
@@ -27,11 +29,8 @@
 						<goals>
 							<goal>compile</goal>
 						</goals>
-						<configuration>
-							<compilerVersion>1.7</compilerVersion>
-							<source>1.7</source>
-							<target>1.7</target>
-						</configuration>
+						<!-- <configuration> <compilerVersion>1.7</compilerVersion> <source>1.7</source> 
+							<target>1.7</target> </configuration> -->
 					</execution>
 				</executions>
 			</plugin>
@@ -60,14 +59,55 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.19.1</version>
 				<configuration>
+
 					<testFailureIgnore>true</testFailureIgnore>
+					<argLine>
+						-javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
+					</argLine>
+					<properties>
+						<property>
+							<name>listener</name>
+							<value>ru.yandex.qatools.allure.testng.AllureTestListener</value>
+						</property>
+					</properties>
 					<suiteXmlFiles>
 						<suiteXmlFile>src/test/java/testngxmls/testng.xml</suiteXmlFile>
 					</suiteXmlFiles>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.aspectj</groupId>
+						<artifactId>aspectjweaver</artifactId>
+						<version>${aspectj.version}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>9.2.10.v20150310</version>
+				<configuration>
+					<webAppSourceDirectory>${project.build.directory}/site/allure-maven-plugin</webAppSourceDirectory>
+					<stopKey>stop</stopKey>
+					<stopPort>1234</stopPort>
+				</configuration>
+			</plugin>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-surefire-plugin</artifactId> 
+				<version>2.19.1</version> <configuration> <testFailureIgnore>true</testFailureIgnore> 
+				<suiteXmlFiles> <suiteXmlFile>src/test/java/testngxmls/testng.xml</suiteXmlFile> 
+				</suiteXmlFiles> </configuration> </plugin> -->
 		</plugins>
 	</build>
+	<reporting>
+		<excludeDefaults>true</excludeDefaults>
+		<plugins>
+			<plugin>
+				<groupId>ru.yandex.qatools.allure</groupId>
+				<artifactId>allure-maven-plugin</artifactId>
+				<version>2.2</version>
+			</plugin>
+		</plugins>
+	</reporting>
 	<dependencies>
 		<dependency>
 			<groupId>org.testng</groupId>
@@ -77,7 +117,7 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-server</artifactId>
-			<version>2.53.0</version>
+			<version>2.53.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>

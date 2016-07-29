@@ -123,7 +123,6 @@ public class ExcelReportListener implements ISuiteListener, ITestListener {
 			while (method_iterator.hasNext() && status_iterator.hasNext()) {
 				ITestNGMethod iTestNGMethod = (ITestNGMethod) method_iterator.next();
 				ITestResult iTestResult = (ITestResult) status_iterator.next();
-				
 				XSSFRow row = sheet.createRow(index++);
 				XSSFCell name_cel = row.createCell(0);
 				name_cel.setCellValue(iTestNGMethod.getTestClass().getName() + "." + iTestNGMethod.getMethodName());

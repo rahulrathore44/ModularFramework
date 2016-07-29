@@ -32,6 +32,7 @@
 	<test name="ExcelReader Test">
 		<classes>
 			<class name="com.modular.framework.TestExcelData" />
+			<class name="com.modular.framework.TestCheckBox" />
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->

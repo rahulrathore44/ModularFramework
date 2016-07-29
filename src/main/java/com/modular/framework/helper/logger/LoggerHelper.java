@@ -26,11 +26,11 @@ public class LoggerHelper {
 	
 	private static String patteren = "%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{1}] - [%M] %m%n";
 	private static Logger root = null;
+	
 	public static Layout getPatternLayout(String patteren) {
 		return new PatternLayout(patteren);
 	}
 	
-		
 	public static String getPatteren() {
 		return patteren;
 	}
