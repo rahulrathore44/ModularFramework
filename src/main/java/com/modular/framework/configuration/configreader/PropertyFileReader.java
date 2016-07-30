@@ -61,6 +61,14 @@ public class PropertyFileReader implements IconfigReader {
 	public int getExplicitWait() {
 		return Integer.parseInt(prop.getProperty("ExplicitWait"));
 	}
+	
+	public String getDbType() {
+		return prop.getProperty("DataBase.Type");
+	}
+
+	public String getDbConnStr() {
+		return prop.getProperty("DtaBase.ConnectionStr");
+	}
 
 	public BrowserType getBrowser() {
 		return BrowserType.valueOf(prop.getProperty("Browser"));

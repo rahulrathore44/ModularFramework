@@ -24,7 +24,7 @@ public class InitWebdriver {
 
 	protected static PropertyFileReader reader = null;
 	protected static WebDriver Driver = null;
-	public static final Logger log = LoggerHelper.getLogger(InitWebdriver.class);
+	protected static final Logger log = LoggerHelper.getLogger(InitWebdriver.class);
 
 	public InitWebdriver() {
 		reader = new PropertyFileReader();
