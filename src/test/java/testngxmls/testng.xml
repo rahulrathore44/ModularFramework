@@ -38,6 +38,7 @@
 	<test name="Page Object Test">
 		<classes>
 			<class name="com.modular.framework.TestPageObject" />
+			<class name="com.modular.framework.online.TestPhpOnline" />
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->

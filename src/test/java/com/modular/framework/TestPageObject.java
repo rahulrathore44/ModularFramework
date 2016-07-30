@@ -21,10 +21,12 @@ import com.modular.framework.helper.PageObject.BugzilaPage.LoginPage;
 public class TestPageObject extends InitWebdriver {
 	
 	@Test
-	public void testPageObjectModel() {
+	public void testPageObjectModel() throws SecurityException, NoSuchFieldException  {
 		
 		HomePage hPage = new HomePage(Driver);
+		System.out.println(hPage.get(""));
 		LoginPage lPage = hPage.clickNewBug();
+		lPage.waitForElement(lPage.LoginTxtBx, 60);
 		lPage.LoginTxtBx.sendKeys(reader.getUserName());
 		lPage.PassTxtBx.sendKeys(reader.getPassword());
 		lPage.RestricChk.click();

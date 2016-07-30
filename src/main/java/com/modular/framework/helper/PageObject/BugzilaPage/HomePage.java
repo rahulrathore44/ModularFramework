@@ -5,19 +5,13 @@
  */
 package com.modular.framework.helper.PageObject.BugzilaPage;
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotVisibleException;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import com.modular.framework.helper.InitWebdriver;
 import com.modular.framework.helper.PageObject.PageBase;
-import com.modular.framework.helper.Waits.WaitHelper;
 
 /**
  * @author rahul.rathore
@@ -42,11 +36,11 @@ public class HomePage extends PageBase {
 	
 	public LoginPage clickNewBug() {
 		NewBug.click();
-		WaitHelper.waitForElement(By.id("Bugzilla_login"), InitWebdriver.getReader().getExplicitWait()
-				, 250
-				, TimeUnit.SECONDS, NoSuchElementException.class
-				,ElementNotVisibleException.class);
 		return new LoginPage(driver);
+	}
+	
+	public By get(String name) throws SecurityException, NoSuchFieldException {
+		return getElemetLocator(this, "NewBug");
 	}
 
 }
