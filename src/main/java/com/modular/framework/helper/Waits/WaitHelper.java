@@ -22,6 +22,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.google.common.base.Function;
 import com.modular.framework.helper.InitWebdriver;
 import com.modular.framework.helper.Generic.GenericHelper;
+import com.modular.framework.helper.Javascript.JavaScriptHelper;
 import com.modular.framework.helper.logger.LoggerHelper;
 
 /**
@@ -105,6 +106,18 @@ public class WaitHelper {
 		log.info(locator);
 		wait.until(elementLocatedBy(locator));
 		setImplicitWait(InitWebdriver.getReader().getImplicitWait(), TimeUnit.SECONDS);
+	}
+	
+	public static void elementExistAndVisible(By locator,int timeOutInSeconds,int pollingEveryInMiliSec,TimeUnit unit) {
+		setImplicitWait(1, TimeUnit.SECONDS);
+		WebDriverWait wait = getWait(timeOutInSeconds, pollingEveryInMiliSec, unit, NoSuchElementException.class,
+				InvalidElementStateException.class);
+		log.info(locator);
+		wait.until(elementLocatedBy(locator));
+		JavaScriptHelper.scrollIntoView(locator);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+		setImplicitWait(InitWebdriver.getReader().getImplicitWait(), TimeUnit.SECONDS);
+		
 	}
 	
 	private static Function<WebDriver, Boolean> elementLocatedBy(final By locator){
