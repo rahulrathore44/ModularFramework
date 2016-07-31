@@ -5,6 +5,7 @@
  */
 package com.modular.framework.interfaces;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -16,9 +17,9 @@ import java.util.Map;
  */
 public interface IdataBase {
 	
-	public Object[][] getData(String table);
-	public Object[][] getData();
-	public List<Map<String, Object>> getDbData();
-	public List<Map<String, Object>> getDbData(String table);
+	public Object[][] getData(String query,String... columnName) throws SQLException,ClassNotFoundException;
+	public Object[][] getData(String query)throws SQLException,ClassNotFoundException;
+	public List<Map<String, Object>> getDbData(String query)throws SQLException,ClassNotFoundException;
+	public List<Map<String, Object>> getDbData(String query,String... columnName)throws SQLException,ClassNotFoundException;
 
 }
