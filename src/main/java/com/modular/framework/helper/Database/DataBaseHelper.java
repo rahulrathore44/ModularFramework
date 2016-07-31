@@ -48,6 +48,10 @@ public class DataBaseHelper implements IdataBase {
 	public void setConnectionStr(String connectionStr) {
 		this.connectionStr = connectionStr;
 	}
+	
+	public DataBaseHelper(){
+		this("");
+	}
 
 	public DataBaseHelper(String connectionStr) {
 		if("".equalsIgnoreCase(connectionStr))
@@ -57,13 +61,27 @@ public class DataBaseHelper implements IdataBase {
 	}
 
 	public ResultSet executeQuery(String query) throws SQLException, ClassNotFoundException {
-		try(Statement exeStatment = getConnection()) {
+		try {
+			Statement exeStatment = getConnection();
 			if(query.contains("select") || query.contains("Select")){
 				return exeStatment.executeQuery(query);
 			}else{
 				throw new IllegalArgumentException("Select query not found");
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
+			log.error(e);
+			throw e;
+		}
+	}
+	
+	public int executeUpdate(String query) throws SQLException,ClassNotFoundException {
+		try(Statement exeStatment = getConnection()) {
+			if(!(query.contains("select") || query.contains("Select"))){
+				return exeStatment.executeUpdate(query);
+			}else{
+				throw new IllegalArgumentException("Dml query not found");
+			}
+		} catch (SQLException | ClassNotFoundException e) {
 			log.error(e);
 			throw e;
 		}
@@ -108,9 +126,8 @@ public class DataBaseHelper implements IdataBase {
 		List<Map<String, Object>> data = new LinkedList<Map<String,Object>>();
 
 		while(set.next()){
-			Map<String, Object> tableData = null;
-			for (int i = 0; i < metaData.getColumnCount(); i++) {
-				tableData = new LinkedHashMap<String, Object>();
+			Map<String, Object> tableData = new LinkedHashMap<String, Object>();
+			for (int i = 1; i <= metaData.getColumnCount(); i++) {
 				tableData.put(metaData.getColumnLabel(i), set.getObject(i));
 			}
 			data.add(tableData);
@@ -128,7 +145,7 @@ public class DataBaseHelper implements IdataBase {
 			Map<String, Object> filteMap = new LinkedHashMap<String, Object>();
 
 			for(int i = 0; i < columnName.length; i++){
-				filteMap.put(columnName[i], map.get(columnName));
+				filteMap.put(columnName[i], map.get(columnName[i]));
 			}
 			filterData.add(filteMap);
 		}
