@@ -36,8 +36,8 @@ public class DataBaseHelper implements IdataBase {
 	protected static final Logger log = LoggerHelper.getLogger(DataBaseHelper.class);
 
 	public Statement getConnection() throws SQLException, ClassNotFoundException {
-		if("sql".equalsIgnoreCase(((PropertyFileReader)InitWebdriver.getReader()).getDbConnStr()))
-			Class.forName("com.microsoft.sqlserver.jdbc.SqlServerDriver");
+		if("sql".equalsIgnoreCase(((PropertyFileReader)InitWebdriver.getReader()).getDbType()))
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		else
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 
