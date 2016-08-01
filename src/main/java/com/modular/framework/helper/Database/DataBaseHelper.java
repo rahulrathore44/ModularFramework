@@ -21,7 +21,7 @@ import org.apache.log4j.Logger;
 import com.modular.framework.configuration.configreader.PropertyFileReader;
 import com.modular.framework.helper.InitWebdriver;
 import com.modular.framework.helper.logger.LoggerHelper;
-import com.modular.framework.interfaces.IdataBase;
+import com.modular.framework.interfaces.IdataReader;
 
 /**
  * @author rahul.rathore
@@ -29,7 +29,7 @@ import com.modular.framework.interfaces.IdataBase;
  *	30-Jul-2016
  *
  */
-public class DataBaseHelper implements IdataBase {
+public class DataBaseHelper implements IdataReader {
 
 	private String connectionStr = "";
 
@@ -90,7 +90,7 @@ public class DataBaseHelper implements IdataBase {
 	@Override
 	public Object[][] getData(String query, String... columnName)
 			throws SQLException, ClassNotFoundException {
-		List<Map<String, Object>> tableData = getDbData(query,columnName);
+		List<Map<String, Object>> tableData = getTableData(query,columnName);
 
 		Object[][] data = new Object[tableData.size()][1];
 
@@ -106,7 +106,7 @@ public class DataBaseHelper implements IdataBase {
 	@Override
 	public Object[][] getData(String query) throws SQLException,
 	ClassNotFoundException {
-		List<Map<String, Object>> tableData = getDbData(query);
+		List<Map<String, Object>> tableData = getTableData(query);
 		Object[][] data = new Object[tableData.size()][1];
 
 		int i = 0;
@@ -119,7 +119,7 @@ public class DataBaseHelper implements IdataBase {
 	}
 
 	@Override
-	public List<Map<String, Object>> getDbData(String query)
+	public List<Map<String, Object>> getTableData(String query)
 			throws SQLException, ClassNotFoundException {
 		ResultSet set = executeQuery(query);
 		ResultSetMetaData metaData = set.getMetaData();
@@ -136,9 +136,9 @@ public class DataBaseHelper implements IdataBase {
 	}
 
 	@Override
-	public List<Map<String, Object>> getDbData(String query,
+	public List<Map<String, Object>> getTableData(String query,
 			String... columnName) throws SQLException, ClassNotFoundException {
-		List<Map<String, Object>> tableData = getDbData(query);
+		List<Map<String, Object>> tableData = getTableData(query);
 		List<Map<String, Object>> filterData = new LinkedList<Map<String,Object>>();
 
 		for (Map<String, Object> map : tableData) {

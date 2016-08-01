@@ -25,6 +25,7 @@ import com.modular.framework.helper.HyperLink.LinkHelper;
 import com.modular.framework.helper.TextBox.TextBoxHelper;
 import com.modular.framework.helper.Waits.WaitHelper;
 import com.modular.framework.helper.dropdown.DropDownHelper;
+import com.modular.framework.interfaces.IdataReader;
 import com.modular.framework.utility.ResourceHelper;
 
 /**
@@ -35,15 +36,15 @@ import com.modular.framework.utility.ResourceHelper;
 public class TestExcelData extends InitWebdriver {
 	
 	@Test
-	public void testExcelProvider() {
-		ExcelReaderHelper helper = new ExcelReaderHelper(ResourceHelper.getResourcePath("exceldata/Login.xlsx"), "LoginDetails");
-		Assert.assertEquals(helper.getData().length,3);
+	public void testExcelProvider() throws Exception {
+		IdataReader helper = new ExcelReaderHelper(ResourceHelper.getResourcePath("exceldata/Login.xlsx"));
+		Assert.assertEquals(helper.getData("LoginDetails").length,3);
 		Assert.assertEquals(helper.getData("Details").length,4);
 	}
 	
 	@Test
-	public void testExcelWithMap() {
-		ExcelReaderHelper helper = new ExcelReaderHelper(ResourceHelper.getResourcePath("exceldata/Login.xlsx"), "CreateBug");
+	public void testExcelWithMap() throws Exception {
+		IdataReader helper = new ExcelReaderHelper(ResourceHelper.getResourcePath("exceldata/Login.xlsx"));
 		Driver.get(reader.getWebsite());
 		LinkHelper.clickPartialLink("File a Bug");
 		WaitHelper.waitForElement(By.id("Bugzilla_login"), 90, 250, TimeUnit.SECONDS, NoSuchElementException.class,
@@ -54,7 +55,7 @@ public class TestExcelData extends InitWebdriver {
 		ButtonHelper.click(By.id("Bugzilla_restrictlogin"));
 		ButtonHelper.click(By.id("log_in"));
 		WaitHelper.waitForElement(By.partialLinkText("Testng"), 60, 250, TimeUnit.SECONDS, NoSuchElementException.class);
-		List<Map<String, Object>> data = helper.getExcelData();
+		List<Map<String, Object>> data = helper.getTableData("CreateBug");
 		
 		for (Map<String, Object> map : data) {
 			LinkHelper.clickPartialLink("Testng");

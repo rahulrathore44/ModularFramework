@@ -20,39 +20,33 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.modular.framework.helper.logger.LoggerHelper;
-import com.modular.framework.interfaces.IexcelReader;
+import com.modular.framework.interfaces.IdataReader;
 
 /**
  * @author rsr
  *
  * Jul 28, 2016
  */
-public class ExcelReaderHelper implements IexcelReader {
+public class ExcelReaderHelper implements IdataReader {
 	
 	private XSSFWorkbook wBook = null;
-	private String sheetName = "";
 	
 	public static final Logger log = LoggerHelper.getLogger(ExcelReaderHelper.class);
 	
-	public ExcelReaderHelper(String xlFile,String sheetName) {
-		this(new File(xlFile),sheetName);
+	public ExcelReaderHelper(String xlFile) {
+		this(new File(xlFile));
 	}
 	
-	public ExcelReaderHelper(File xlFile,String sheetName) {
+	public ExcelReaderHelper(File xlFile) {
 		try {
 			wBook = new XSSFWorkbook(xlFile);
 		} catch (InvalidFormatException | IOException e) {
 			log.error("Error in opening Excel Sheet : " + xlFile.getAbsolutePath(),e);
 			e.printStackTrace();
 		}
-		this.sheetName = sheetName;
 	}
 	
-	public void setNewSheet(String sheetName) {
-		this.sheetName = sheetName;
-	}
-	
-	private List<String> getHeaderArray() {
+	private List<String> getHeaderArray(String sheetName) {
 		LinkedList<String> header = new LinkedList<String>();
 		XSSFSheet sSheet = wBook.getSheet(sheetName);
 		
@@ -64,27 +58,41 @@ public class ExcelReaderHelper implements IexcelReader {
 	}
 	
 	@Override
-	public Object[][] getData() {
-		List<Map<String, Object>> xlData = getExcelData();
-		Object[][] data = new Object[xlData.size()][1];
+	public Object[][] getData(String sheet) throws Exception {
+		List<Map<String, Object>> tableData = getTableData(sheet);
+		Object[][] data = new Object[tableData.size()][1];
+
 		int i = 0;
-		for (Map<String, Object> objects : xlData) {
-			data[i++][0] = objects;
+
+		for (Map<String, Object> map : tableData) {
+			data[i++][0] = map;
 		}
+
 		return data;
 	}
 
 	@Override
-	public Object[][] getData(String sheet) {
-		this.sheetName = sheet;
-		return getData();
+	public Object[][] getData(String sheet, String... columnName)
+			throws Exception {
+		List<Map<String, Object>> tableData = getTableData(sheet,columnName);
+
+		Object[][] data = new Object[tableData.size()][1];
+
+		int i = 0;
+
+		for (Map<String, Object> map : tableData) {
+			data[i++][0] = map;
+		}
+
+		return data;
 	}
 
 	@Override
-	public List<Map<String, Object>> getExcelData() {
+	public List<Map<String, Object>> getTableData(String sheetName)
+			throws Exception {
 		XSSFSheet sheet = wBook.getSheet(sheetName);
 		int totalCol = sheet.getRow(0).getLastCellNum();
-		List<String> header = getHeaderArray();
+		List<String> header = getHeaderArray(sheetName);
 		List<Map<String, Object>> data = new LinkedList<Map<String, Object>>(); 
 		LinkedHashMap<String, Object> xlData = null;
 		
@@ -116,9 +124,20 @@ public class ExcelReaderHelper implements IexcelReader {
 	}
 
 	@Override
-	public List<Map<String, Object>> getExcelData(String sheet) {
-		this.sheetName = sheet;
-		return getExcelData();
+	public List<Map<String, Object>> getTableData(String sheet,
+			String... columnName) throws Exception {
+		List<Map<String, Object>> tableData = getTableData(sheet);
+		List<Map<String, Object>> filterData = new LinkedList<Map<String,Object>>();
+
+		for (Map<String, Object> map : tableData) {
+			Map<String, Object> filteMap = new LinkedHashMap<String, Object>();
+
+			for(int i = 0; i < columnName.length; i++){
+				filteMap.put(columnName[i], map.get(columnName[i]));
+			}
+			filterData.add(filteMap);
+		}
+		return filterData;
 	}
 
 }
