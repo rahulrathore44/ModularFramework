@@ -5,7 +5,6 @@
  */
 package com.modular.framework.helper.Browser;
 
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
