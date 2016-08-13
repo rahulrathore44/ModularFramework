@@ -6,15 +6,10 @@
 package com.modular.framework;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotVisibleException;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.testng.annotations.Test;
 
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.modular.framework.helper.InitWebdriver;
 import com.modular.framework.helper.Alert.AlertHelper;
 import com.modular.framework.helper.Browser.BrowserHelper;
