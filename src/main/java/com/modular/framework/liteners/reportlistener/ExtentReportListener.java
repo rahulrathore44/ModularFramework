@@ -67,7 +67,7 @@ public class ExtentReportListener implements ISuiteListener,ITestListener {
 	}
 
 	public void onTestFailure(ITestResult test) {
-		exTest.log(LogStatus.FAIL, test.getMethod().getMethodName());
+		exTest.log(LogStatus.FAIL, test.getTestClass().getName() + "." + test.getMethod().getMethodName());
 		exTest.log(LogStatus.FAIL, test.getThrowable());
 		try {
 			String src = GenericHelper.takeScreenShot(test.getMethod().getMethodName());
@@ -77,8 +77,8 @@ public class ExtentReportListener implements ISuiteListener,ITestListener {
 		}
 	}
 
-	public void onTestSkipped(ITestResult arg0) {
-		// TODO Auto-generated method stub
+	public void onTestSkipped(ITestResult test) {
+		exTest.log(LogStatus.SKIP, test.getTestClass().getName() + "." + test.getMethod().getMethodName());
 		
 	}
 
@@ -88,7 +88,7 @@ public class ExtentReportListener implements ISuiteListener,ITestListener {
 	}
 
 	public void onTestSuccess(ITestResult test) {
-		exTest.log(LogStatus.PASS, test.getMethod().getMethodName());
+		exTest.log(LogStatus.PASS, test.getTestClass().getName() + "." + test.getMethod().getMethodName());
 		
 	}
 
